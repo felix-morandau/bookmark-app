@@ -3,6 +3,9 @@ package com.felix.bookmark_app.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -10,15 +13,31 @@ import java.util.UUID;
 @Table(name = "bookmark")
 public class Bookmark {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "URL", nullable = false, unique = true)
-    private String url;
+    @ManyToOne
+    @JoinColumn(name = "link_id", nullable = false)
+    private Link link;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "description")
     private String description;
 
-    private boolean secure;
+    @Column(name = "secure", nullable = false)
+    private boolean secure = false;
 
-    private
+    @ManyToMany
+    @JoinTable(
+            name = "category_bookmark",
+            joinColumns =  @JoinColumn(name = "bookmark_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
+    @Column(name = "timestamp", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
