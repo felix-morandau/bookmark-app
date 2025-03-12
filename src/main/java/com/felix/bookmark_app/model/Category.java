@@ -23,4 +23,7 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     private Set<Bookmark> bookmarks = new HashSet<>();
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<Collection> collections = new HashSet<>();
 }
