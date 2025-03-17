@@ -16,9 +16,11 @@ public class Collection {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @Column(name = "Category", nullable = false)
     private Category category;
+
+    @ManyToMany(mappedBy = "collections")
+    private List<Bookmark> bookmarks = new ArrayList<>();
 
     @Column(name = "description")
     private String description;
