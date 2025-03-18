@@ -27,12 +27,7 @@ public class BookmarkService {
     private UserService userService;
     private LinkRepository linkRepository;
 
-    public List<Bookmark> getAllBookmarks(Boolean visible) {
-
-        if (visible != null) {
-            return bookmarkRepository.findBookmarkByVisible(visible);
-        }
-
+    public List<Bookmark> getAllBookmarks() {
         return bookmarkRepository.findAll();
     }
 
@@ -47,7 +42,6 @@ public class BookmarkService {
         bookmark.setLink(link);
         bookmark.setUser(user);
         bookmark.setTitle(bookmarkDTO.getTitle());
-        bookmark.setVisible(bookmarkDTO.isVisible());
         bookmark.setDescription(bookmarkDTO.getDescription());
         bookmark.setCreatedAt(LocalDateTime.now());
         user.getBookmarks().add(bookmark);
@@ -73,10 +67,6 @@ public class BookmarkService {
 
         if (bookmarkDTO.getCategory() != null) {
             bookmark.setCategory(bookmarkDTO.getCategory());
-        }
-
-        if (bookmarkDTO.isVisible() != bookmark.isVisible()) {
-            bookmark.setVisible(bookmarkDTO.isVisible());
         }
 
         return bookmarkRepository.save(bookmark);
@@ -107,12 +97,8 @@ public class BookmarkService {
         return bookmarkRepository.findByTitle(title);
     }
 
-    public List<Bookmark> getBookmarksByUser(String username, Boolean visible) {
+    public List<Bookmark> getBookmarksByUser(String username) {
         User user = userService.getUserByUsername(username);
-
-        if (visible != null) {
-            return bookmarkRepository.findByUserAndVisible(user, visible);
-        }
         return bookmarkRepository.findByUser(user);
     }
 

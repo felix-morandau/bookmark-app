@@ -32,15 +32,16 @@ public class User {
     @Column(name = "bio")
     private String bio;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Bookmark> bookmarks  = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "user_collection",
+            name = "saved_collections",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "collection_id")
     )
-    private Set<Collection> collections = new HashSet<>();
+    private Set<Collection> savedCollections = new HashSet<>();
+
 }

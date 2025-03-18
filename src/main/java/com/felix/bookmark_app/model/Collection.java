@@ -28,6 +28,12 @@ public class Collection {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "collections")
-    private Set<User> users = new HashSet<>();
+    @Column(name = "creator", nullable = false)
+    private String creator;
+
+    @Column(name = "public", nullable = false)
+    private boolean visible;
+
+    @ManyToMany(mappedBy = "savedCollections", cascade = CascadeType.ALL)
+    private Set<User> savedByUsers = new HashSet<>();
 }

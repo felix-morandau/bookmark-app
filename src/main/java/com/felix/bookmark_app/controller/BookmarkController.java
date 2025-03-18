@@ -21,18 +21,15 @@ public class BookmarkController {
     private final BookmarkService bookmarkService;
 
     @GetMapping("/bookmarks")
-    public List<Bookmark> getAllBookmarks(
-            @RequestParam(required = false) Boolean visible
-    ) {
-        return bookmarkService.getAllBookmarks(visible);
+    public List<Bookmark> getAllBookmarks() {
+        return bookmarkService.getAllBookmarks();
     }
 
     @GetMapping("{username}/bookmarks")
     public List<Bookmark> getAllUserBookmarks(
-            @PathVariable String username,
-            @RequestParam(required = false) Boolean visible
+            @PathVariable String username
     ) {
-        return bookmarkService.getBookmarksByUser(username, visible);
+        return bookmarkService.getBookmarksByUser(username);
     }
 
     @GetMapping("{username}/bookmarks/bookmark/{id}")

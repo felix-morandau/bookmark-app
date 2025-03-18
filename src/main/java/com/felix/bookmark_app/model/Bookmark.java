@@ -31,9 +31,6 @@ public class Bookmark {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "public", nullable = false)
-    private boolean visible;
-
     @ManyToMany
     @JoinTable(
             name = "bookmark_collection",

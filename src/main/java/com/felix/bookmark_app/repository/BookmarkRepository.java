@@ -19,10 +19,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, UUID> {
 
     List<Bookmark> findByUser(User user);
 
-    List<Bookmark> findByUserAndVisible(User user, Boolean visible);
-
-    List<Bookmark> findBookmarkByVisible(boolean visible);
-
     @Query("SELECT b FROM Bookmark b JOIN Link l WHERE l.secure = true")
     List<Bookmark> findBySecureLinks();
 

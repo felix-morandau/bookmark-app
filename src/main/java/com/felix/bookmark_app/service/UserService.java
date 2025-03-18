@@ -10,7 +10,6 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -86,9 +85,5 @@ public class UserService {
         return userRepository.findUserByUsername(username).orElseThrow(
                 NoUserFoundException::new
         );
-    }
-
-    public List<User> getSuperUsers() {
-        return userRepository.findSuperUsers();
     }
 }

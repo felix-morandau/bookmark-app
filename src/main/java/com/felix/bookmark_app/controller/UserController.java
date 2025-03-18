@@ -43,11 +43,6 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    @GetMapping("/superusers")
-    public List<User> getSuperUsers() {
-        return userService.getSuperUsers();
-    }
-
     @PostMapping
     public User addUser( @Valid @RequestBody UserCreateDTO userCreateDTO) {
         return userService.addUser(userCreateDTO);
