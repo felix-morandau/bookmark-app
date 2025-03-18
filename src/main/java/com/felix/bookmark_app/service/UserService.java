@@ -1,5 +1,6 @@
 package com.felix.bookmark_app.service;
 
+import com.felix.bookmark_app.config.NoUserFoundException;
 import com.felix.bookmark_app.dto.UserCreateDTO;
 import com.felix.bookmark_app.dto.UserUpdateDTO;
 import com.felix.bookmark_app.model.User;
@@ -43,7 +44,7 @@ public class UserService {
         Optional<User> user = userRepository.findUserByUsername(username);
 
         if (user.isEmpty()) {
-            throw new NoSuchElementException("User not found.");
+            throw new NoUserFoundException();
         }
 
         if (userDTO.getEmail() != null) {
@@ -71,19 +72,19 @@ public class UserService {
 
     public User getUserById(UUID id) {
         return userRepository.findUserById(id).orElseThrow(
-                () -> new NoSuchElementException("No user with this id was found.")
+                NoUserFoundException::new
         );
     }
 
     public User getUserByEmail(String email) {
         return userRepository.findUserByEmail(email).orElseThrow(
-                () -> new NoSuchElementException("User with inserted email does not exist.")
+                NoUserFoundException::new
         );
     }
 
     public User getUserByUsername(String username) {
         return userRepository.findUserByUsername(username).orElseThrow(
-                () -> new NoSuchElementException("User with inserted username does not exist.")
+                NoUserFoundException::new
         );
     }
 

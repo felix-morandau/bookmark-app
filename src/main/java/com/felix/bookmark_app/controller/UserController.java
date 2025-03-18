@@ -6,6 +6,7 @@ import com.felix.bookmark_app.model.User;
 import com.felix.bookmark_app.model.UserType;
 import com.felix.bookmark_app.repository.UserRepository;
 import com.felix.bookmark_app.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -48,12 +49,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User addUser(@RequestBody UserCreateDTO userCreateDTO) {
+    public User addUser( @Valid @RequestBody UserCreateDTO userCreateDTO) {
         return userService.addUser(userCreateDTO);
     }
 
     @PostMapping("/{username}")
-    public User updateUser(@PathVariable String username, @RequestBody UserUpdateDTO userUpdateDTO) {
+    public User updateUser(@PathVariable String username, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
         return userService.updateUser(username, userUpdateDTO);
     }
 

@@ -1,5 +1,6 @@
 package com.felix.bookmark_app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,11 @@ public class Link {
     @Column(name = "URL", nullable = false, unique = true)
     private String url;
 
-    @Column(name = "secure", nullable = false)
+    @Column(name = "secure")
     private boolean secure = false;
 
     @OneToMany(mappedBy = "link", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Bookmark> bookmarks = new ArrayList<>();
 
     public Link(String url) {

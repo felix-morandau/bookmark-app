@@ -1,4 +1,4 @@
 package com.felix.bookmark_app.dto;
 
-public class CollectionDTO {
+public class CollectionUpdateDTO {
 }

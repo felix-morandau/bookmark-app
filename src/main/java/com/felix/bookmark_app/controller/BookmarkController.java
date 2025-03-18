@@ -4,45 +4,65 @@ import com.felix.bookmark_app.dto.BookmarkCreateDTO;
 import com.felix.bookmark_app.dto.BookmarkUpdateDTO;
 import com.felix.bookmark_app.model.Bookmark;
 import com.felix.bookmark_app.service.BookmarkService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/bookmarks")
+@RequestMapping
 public class BookmarkController {
     private final BookmarkService bookmarkService;
 
-    @GetMapping()
+    @GetMapping("/bookmarks")
     public List<Bookmark> getAllBookmarks(
-            @RequestParam(required = false) boolean visible
+            @RequestParam(required = false) Boolean visible
     ) {
         return bookmarkService.getAllBookmarks(visible);
     }
 
-    @PostMapping
+    @GetMapping("{username}/bookmarks")
+    public List<Bookmark> getAllUserBookmarks(
+            @PathVariable String username,
+            @RequestParam(required = false) Boolean visible
+    ) {
+        return bookmarkService.getBookmarksByUser(username, visible);
+    }
+
+    @GetMapping("{username}/bookmarks/bookmark/{id}")
+    public Bookmark getBookmark(
+            @PathVariable UUID id,
+            @PathVariable String username) {
+        return bookmarkService.getBookmarkByIdAndUsername(id, username);
+    }
+
+    @PostMapping("{username}/bookmarks/add_bookmark")
     public Bookmark createBookmark(
-            @RequestBody BookmarkCreateDTO bookmarkCreateDTO,
-            @RequestParam String username
+            @PathVariable String username,
+            @Valid @RequestBody BookmarkCreateDTO bookmarkCreateDTO
     ) {
         return bookmarkService.addBookmark(bookmarkCreateDTO, username);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{username}/bookmarks/bookmark/{bookmark_id}")
     public Bookmark updateBookmark(
-            @PathVariable UUID id,
-            @RequestBody BookmarkUpdateDTO bookmarkDTO
+            @PathVariable String username,
+            @PathVariable UUID bookmark_id,
+            @Valid @RequestBody BookmarkUpdateDTO bookmarkDTO
     ) {
-        return bookmarkService.updateBookmark(id, bookmarkDTO);
+        return bookmarkService.updateBookmark(bookmark_id, bookmarkDTO, username);
     }
 
-    @DeleteMapping
-    public void deleteBookmark(UUID id) {
-        bookmarkService.deleteBookmark(id);
+    @DeleteMapping("{username}/bookmarks/bookmark/{bookmark_id}")
+    public void deleteBookmark(
+            @PathVariable UUID bookmark_id,
+            @PathVariable String username) {
+        bookmarkService.deleteBookmark(bookmark_id, username);
     }
 }

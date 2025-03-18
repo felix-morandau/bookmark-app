@@ -1,7 +1,6 @@
 package com.felix.bookmark_app.dto;
 
 import com.felix.bookmark_app.model.Category;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 

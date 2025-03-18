@@ -1,9 +1,12 @@
 package com.felix.bookmark_app.service;
 
+import com.felix.bookmark_app.config.NoBookmarkFoundException;
 import com.felix.bookmark_app.dto.BookmarkCreateDTO;
 import com.felix.bookmark_app.dto.BookmarkUpdateDTO;
 import com.felix.bookmark_app.model.*;
 import com.felix.bookmark_app.repository.BookmarkRepository;
+import com.felix.bookmark_app.repository.LinkRepository;
+import com.felix.bookmark_app.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,11 +25,12 @@ import java.util.UUID;
 public class BookmarkService {
     private BookmarkRepository bookmarkRepository;
     private UserService userService;
+    private LinkRepository linkRepository;
 
-    public List<Bookmark> getAllBookmarks(boolean visible) {
+    public List<Bookmark> getAllBookmarks(Boolean visible) {
 
-        if (visible) {
-            return bookmarkRepository.findBookmarkByVisible(true);
+        if (visible != null) {
+            return bookmarkRepository.findBookmarkByVisible(visible);
         }
 
         return bookmarkRepository.findAll();
@@ -36,21 +40,28 @@ public class BookmarkService {
         User user = userService.getUserByUsername(username);
         Bookmark bookmark = new Bookmark();
 
+        Link link = linkRepository.findByUrl(bookmarkDTO.getUrl())
+                .orElseGet(() -> linkRepository.save(new Link(bookmarkDTO.getUrl())));
+
         bookmark.setCategory(bookmarkDTO.getCategory());
-        bookmark.setLink(new Link(bookmarkDTO.getUrl()));
+        bookmark.setLink(link);
         bookmark.setUser(user);
-        bookmark.setTitle(bookmark.getTitle());
+        bookmark.setTitle(bookmarkDTO.getTitle());
         bookmark.setVisible(bookmarkDTO.isVisible());
-        bookmark.setDescription(bookmark.getDescription());
+        bookmark.setDescription(bookmarkDTO.getDescription());
         bookmark.setCreatedAt(LocalDateTime.now());
         user.getBookmarks().add(bookmark);
 
-        return bookmark;
+        return bookmarkRepository.save(bookmark);
     }
 
-    public Bookmark updateBookmark(UUID id, BookmarkUpdateDTO bookmarkDTO) {
+    public Bookmark updateBookmark(UUID id, BookmarkUpdateDTO bookmarkDTO, String username) {
         Bookmark bookmark = bookmarkRepository.findBookmarkById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Bookmark not found with ID: " + id));
+                .orElseThrow(NoBookmarkFoundException::new);
+
+        if (!bookmark.getUser().getUsername().equals(username)) {
+            throw new IllegalStateException("Unauthorized to delete this bookmark");
+        }
 
         if (bookmarkDTO.getTitle() != null) {
             bookmark.setTitle(bookmarkDTO.getTitle());
@@ -71,13 +82,21 @@ public class BookmarkService {
         return bookmarkRepository.save(bookmark);
     }
 
-    public void deleteBookmark(UUID id) {
+    public void deleteBookmark(UUID id, String username) {
+        Bookmark bookmark = bookmarkRepository.findBookmarkById(id)
+                .orElseThrow(NoBookmarkFoundException::new);
+
+        if (!bookmark.getUser().getUsername().equals(username)) {
+            throw new IllegalStateException("Unauthorized to delete this bookmark");
+        }
+
         bookmarkRepository.deleteById(id);
     }
 
-    public Bookmark getBookmarkById(UUID id) {
-        return bookmarkRepository.findBookmarkById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Bookmark with ID " + id + " not found."));
+    public Bookmark getBookmarkByIdAndUsername(UUID id, String username) {
+        User user = userService.getUserByUsername(username);
+
+        return user.getBookmarks().stream().filter(bookmark -> bookmark.getId().equals(id)).findFirst().orElseThrow(NoBookmarkFoundException::new);
     }
 
     public List<Bookmark> getBookmarksByCategory(Category category) {
@@ -88,8 +107,12 @@ public class BookmarkService {
         return bookmarkRepository.findByTitle(title);
     }
 
-    public List<Bookmark> getBookmarksByUser(String username) {
+    public List<Bookmark> getBookmarksByUser(String username, Boolean visible) {
         User user = userService.getUserByUsername(username);
+
+        if (visible != null) {
+            return bookmarkRepository.findByUserAndVisible(user, visible);
+        }
         return bookmarkRepository.findByUser(user);
     }
 

@@ -1,5 +1,6 @@
 package com.felix.bookmark_app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Bookmark {
 
     @ManyToOne
     @JoinColumn(name = "link_id", nullable = false)
+    @JsonBackReference
     private Link link;
 
     @Column(name = "title", nullable = false)
@@ -23,6 +25,7 @@ public class Bookmark {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @Column(name = "description")
