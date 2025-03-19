@@ -1,29 +1,25 @@
 package com.felix.bookmark_app.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
-@Entity
-@Data
-@Table(name = "category")
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToMany(mappedBy = "categories")
-    private Set<Bookmark> bookmarks = new HashSet<>();
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Collection> collections = new HashSet<>();
+public enum Category {
+    EDUCATION,
+    WORK,
+    LEARNING,
+    PRODUCTIVITY,
+    TECHNOLOGY,
+    WEB_DEVELOPMENT,
+    FINANCE,
+    DESIGN,
+    RESEARCH,
+    NEWS,
+    GAMING,
+    MUSIC,
+    MOVIES_AND_TV,
+    SHOPPING,
+    COOKING,
+    FITNESS,
+    TRAVEL,
+    ENVIRONMENT,
+    RESOURCES_AND_TOOLS,
+    COMEDY;
 }
+
