@@ -1,0 +1,68 @@
+/* BookmarksPage.css */
+
+/* Page header styling */
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Container for CRUD buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Button styling (if not already handled in your Button component) */
+.button-container button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.button-container button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+/* Table header and content styling if needed (overrides for the generic table) */
+.react-data-table-component__header {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Modal form labels and inputs styling */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Container for buttons inside the modal */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

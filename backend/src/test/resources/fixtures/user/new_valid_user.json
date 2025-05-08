@@ -1,0 +1,8 @@
+{
+  "username": "client1",
+  "password": "UserUpdate1234!",
+  "email": "alice.smith@example.com",
+  "type": "CLIENT",
+  "bio": "updated",
+  "profilePhotoURL": "http://example.com/alice.jpg"
+}

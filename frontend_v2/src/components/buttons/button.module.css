@@ -1,0 +1,17 @@
+.button-container button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover state for enabled buttons */
+.button-container button:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}

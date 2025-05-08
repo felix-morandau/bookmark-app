@@ -1,0 +1,59 @@
+.collection-post {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.collection-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.collection-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.collection-creator {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 4px 0 0;
+}
+
+.collection-body {
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.collection-category {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.collection-description {
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.collection-footer {
+    text-align: right;
+}
+
+.collection-footer button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.collection-footer button:hover {
+    background-color: #0056b3;
+}

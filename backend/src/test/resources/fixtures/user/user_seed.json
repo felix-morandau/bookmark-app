@@ -1,0 +1,35 @@
+[
+  {
+    "id": null,
+    "username": "client1",
+    "password": "Client1234!",
+    "email": "client1@example.com",
+    "type": "CLIENT",
+    "bio": "Bio for client1",
+    "profilePhotoURL": "http://example.com/client1.jpg",
+    "bookmarks": [],
+    "savedCollections": []
+  },
+  {
+    "id": null,
+    "username": "client2",
+    "password": "Client1234!",
+    "email": "client2@example.com",
+    "type": "CLIENT",
+    "bio": "Bio for client2",
+    "profilePhotoURL": "http://example.com/client2.jpg",
+    "bookmarks": [],
+    "savedCollections": []
+  },
+  {
+    "id": null,
+    "username": "admin1",
+    "password": "Admin1234!",
+    "email": "admin1@example.com",
+    "type": "ADMIN",
+    "bio": "Bio for admin1",
+    "profilePhotoURL": "http://example.com/admin1.jpg",
+    "bookmarks": [],
+    "savedCollections": []
+  }
+]

@@ -1,0 +1,17 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.logo-image {
+    width: 20px;
+    height: auto;
+    max-width: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.logo-image:hover {
+    opacity: 0.8;
+}

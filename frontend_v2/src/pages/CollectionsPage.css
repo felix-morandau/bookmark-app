@@ -1,0 +1,59 @@
+/* CollectionsPage.css */
+
+/* Overall page style */
+.collections-page {
+    padding: 20px;
+}
+
+/* Page header styling */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Standard button styling for action buttons */
+.action-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffc107;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover state for action buttons */
+.action-button:hover:not(:disabled) {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+/* Disabled button styling */
+.action-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Collections feed style */
+.collections-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Post container styling for each collection */
+.post-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    transition: border 0.3s ease, box-shadow
+}

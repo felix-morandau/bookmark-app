@@ -1,0 +1,32 @@
+[
+  {
+    "link": {
+      "url":       "https://example.com/1",
+      "secure":    true
+    },
+    "title":       "Bookmark 1",
+    "description": "First bookmark",
+    "category":    "TECHNOLOGY",
+    "timestamp":   "2025-04-16T10:00:00"
+  },
+  {
+    "link": {
+      "url":       "https://example.com/2",
+      "secure":    true
+    },
+    "title":       "Bookmark 2",
+    "description": "Second bookmark",
+    "category":    "EDUCATION",
+    "timestamp":   "2025-04-16T11:00:00"
+  },
+  {
+    "link": {
+      "url":       "https://example.com/3",
+      "secure":    true
+    },
+    "title":       "Bookmark 3",
+    "description": "Third bookmark",
+    "category":    "DESIGN",
+    "timestamp":   "2025-04-16T12:00:00"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "id": "USER_PLACEHOLDER",
+  "username": "user1",
+  "password": "User1234",
+  "email": "alice.smith@example.com",
+  "type": "CLIENT",
+  "bio": "Alice's bio",
+  "profilePhotoURL": "http://example.com/alice.jpg"
+}
